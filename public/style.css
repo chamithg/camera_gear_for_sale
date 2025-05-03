@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 25px;
+}
+.comic-relief-regular {
+  font-family: "Comic Relief", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.site_name {
+  font-family: "Comic Relief", system-ui;
+  font-weight: 700;
+  font-style: normal;
+  color: rgb(48, 44, 44);
+  font-size: 50px;
+  font-style: italic;
+  text-shadow: 2px 2px 10px #303d3d;
+}
+
+.Page_titles {
+  font-family: "Comic Relief", system-ui;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 40px;
+}
+
+.gen_txt {
+  font-family: "Comic Relief", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  background-image: repeating-linear-gradient(
+      333deg,
+      hsla(119, 47%, 93%, 0.05) 0px,
+      hsla(119, 47%, 93%, 0.05) 1px,
+      transparent 1px,
+      transparent 11px,
+      hsla(119, 47%, 93%, 0.05) 11px,
+      hsla(119, 47%, 93%, 0.05) 12px,
+      transparent 12px,
+      transparent 32px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      hsla(119, 47%, 93%, 0.05) 0px,
+      hsla(119, 47%, 93%, 0.05) 1px,
+      transparent 1px,
+      transparent 11px,
+      hsla(119, 47%, 93%, 0.05) 11px,
+      hsla(119, 47%, 93%, 0.05) 12px,
+      transparent 12px,
+      transparent 32px
+    ),
+    repeating-linear-gradient(
+      135deg,
+      hsla(119, 47%, 93%, 0.05) 0px,
+      hsla(119, 47%, 93%, 0.05) 1px,
+      transparent 1px,
+      transparent 11px,
+      hsla(119, 47%, 93%, 0.05) 11px,
+      hsla(119, 47%, 93%, 0.05) 12px,
+      transparent 12px,
+      transparent 32px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      hsla(119, 47%, 93%, 0.05) 0px,
+      hsla(119, 47%, 93%, 0.05) 1px,
+      transparent 1px,
+      transparent 11px,
+      hsla(119, 47%, 93%, 0.05) 11px,
+      hsla(119, 47%, 93%, 0.05) 12px,
+      transparent 12px,
+      transparent 32px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      hsla(119, 47%, 93%, 0.05) 0px,
+      hsla(119, 47%, 93%, 0.05) 1px,
+      transparent 1px,
+      transparent 11px,
+      hsla(119, 47%, 93%, 0.05) 11px,
+      hsla(119, 47%, 93%, 0.05) 12px,
+      transparent 12px,
+      transparent 32px
+    ),
+    linear-gradient(90deg, rgb(187, 205, 215), rgb(16, 19, 19));
+}
+
+li {
+  list-style-type: none;
+}
+/* Nav bar*/
+
+.nav_container {
+  display: flex;
+  width: 85vw;
+  margin: auto;
+  margin-top: 5vw;
+  justify-content: space-between;
+}
+.nav_content {
+  display: flex;
+  font-size: 30px;
+}
+.logo_conainer {
+  display: flex;
+}
+
+.site_name {
+  margin-left: 50px;
+}
+.search_box {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 20px;
+  /* Glass background*/
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.8px);
+  -webkit-backdrop-filter: blur(5.8px);
+}
+.search {
+  width: 250px;
+  height: 30px;
+  margin: auto;
+  margin-right: 20px;
+  background-color: rgb(217, 221, 224);
+  border-radius: 15px;
+  padding-left: 10px;
+}
+.search_btn {
+  height: 35px;
+  width: 35px;
+  background-color: rgb(86, 110, 122);
+  border-radius: 50%;
+}
+li > a > i {
+  margin: 25px;
+  margin-top: 10px;
+  padding: 5px;
+  color: rgb(2, 40, 59);
+  text-shadow: 2px 2px 10px #c0c4ca;
+}
+li > a > i:hover {
+  color: aliceblue;
+}
+/* content*/
+.content {
+  width: 80vw;
+  margin: auto;
+  margin-top: 2vh;
+}
+
+/* Footer*/
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  width: 100vw;
+  min-height: 15vh;
+  background: rgba(203, 108, 108, 0.014);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.8px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.footer-notes {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.newsletter > h3 {
+  margin-bottom: 10px;
+}
+.social i {
+  margin: 20px;
+  font-size: x-large;
+}
+
+.sub_btn {
+  background-color: rgb(86, 110, 122);
+  padding: 5px;
+  border-radius: 15px;
+}
+.social i:hover {
+  color: aliceblue;
+}
+
+@media (max-width: 600px) {
+  .footer-notes {
+    display: flex;
+    flex-direction: column;
+  }
+  .navBar {
+    display: none;
+  }
+
+  .toggle_button {
+    display: block;
+    position: fixed;
+    right: 17vw;
+  }
+  .nav_container {
+    display: flex;
+  }
+}
