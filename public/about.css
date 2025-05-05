@@ -1,0 +1,17 @@
+.about_content {
+  width: 80vw;
+  margin: auto;
+}
+.about_main {
+  display: flex;
+}
+
+.about_main > p {
+  padding: 20px;
+  background: rgba(137, 0, 0, 0.07);
+  border-radius: 16px;
+  box-shadow: 10px 10px 20px rgba(9, 9, 9, 0.1);
+  backdrop-filter: blur(5.8px);
+  -webkit-backdrop-filter: blur(5.8px);
+  height: 160px;
+}

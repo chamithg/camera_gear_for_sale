@@ -17,6 +17,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="cart.css" />
   </head>
   <body>
     <div class="main_content">
@@ -42,7 +43,7 @@
               <li><a href="/public/storefront.html"><i  class="fa-solid fa-house"></i></a>  </i>  </li>
               <li><a href="/public/cart.html"> <i class="fa-solid fa-cart-shopping"> </i></a> </li>
               <li> <a href="/public/profile"><i class="fa-solid fa-user"> </i></a></li>
-              <li><a href="/public/profile"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+              <li><a href="/public/login-reg"><i class="fa-solid fa-right-from-bracket"></i></a></li>
               <li><a href="/public/about"><i class="fa-solid fa-question"></i></a></li>
             </ul>
           </div>
@@ -50,9 +51,54 @@
       </div>
 
       <!-- content -->
-      <div class="content">
+      <div class="cart_content">
 
-        <h1>Cart</h1>
+        <h1 class="Page_titles">Shopping Cart</h1>
+        <div class="cart_main">
+          <div class="cart_card">
+            <div class="cart_img">
+              <img src="/public/images/cameras/cam1.png" alt="camera1"  width="100"
+            height="auto">
+            </div>
+            <div class="cart_desc">
+              <h1> Cannon 5D mark 4</h1>
+              <p>Black</p>
+            </div>
+            <div> <i class="fa-solid fa-plus"></i> 1 <i class="fa-solid fa-minus"></i></div>
+            <div class="price">
+              <h1> Price: $ 1700.00</h1>
+              <p> tax $ 170.00</p>
+            </div>
+            
+        
+          </div>
+          <div class="cart_card">
+            <div class="cart_img">
+              <img src="/public/images/cameras/cam2.png" alt="camera2"  width="100"
+            height="auto">
+            </div>
+            <div class="cart_desc">
+              <h1> Cannon 4D mark 1</h1>
+              <p>Black</p>
+            </div>
+            <div> <i class="fa-solid fa-plus"></i> 1 <i class="fa-solid fa-minus"></i></div>
+            <div class="price">
+              <h1> Price: $ 1000.00</h1>
+              <p> tax:     $ 100.00</p>
+            </div>
+    
+          </div>
+
+          <div class="checkout_panel">
+            <div >
+              <h1> Total : $ 2970.00</h1>
+              <button class="checkout_btn"> Checkout</button>
+
+            </div>
+              
+          </div>
+        </div>
+
       </div>
 
       <!-- footer -->

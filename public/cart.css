@@ -1,0 +1,39 @@
+.cart_content {
+  width: 80vw;
+  margin: auto;
+  margin-top: 5vh;
+}
+
+.cart_card {
+  display: flex;
+  width: 70vw;
+  height: 75px;
+  justify-content: space-between;
+  padding: 20px;
+  margin: auto;
+  margin-top: 5px;
+  align-items: center;
+  background: rgba(21, 143, 27, 0.07);
+  border-radius: 16px;
+  box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1.8px);
+  -webkit-backdrop-filter: blur(1.8px);
+}
+.price > p {
+  text-align: right;
+}
+.checkout_btn {
+  background-color: rgb(82, 165, 30);
+  padding: 5px;
+  border-radius: 15px;
+  margin-top: 5px;
+  position: relative;
+}
+.checkout_panel {
+  width: 70vw;
+  margin: auto;
+  margin-top: 5px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}

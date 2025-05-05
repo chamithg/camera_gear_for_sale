@@ -1,0 +1,25 @@
+.store_content {
+  width: 80vw;
+  margin: auto;
+}
+.store_main {
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.store_card {
+  width: 250px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 5px;
+  align-items: center;
+  background: rgba(137, 0, 0, 0.07);
+  border-radius: 16px;
+  box-shadow: 10px 10px 20px rgba(9, 9, 9, 0.1);
+  backdrop-filter: blur(5.8px);
+  -webkit-backdrop-filter: blur(5.8px);
+}
