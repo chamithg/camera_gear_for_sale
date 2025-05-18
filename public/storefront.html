@@ -39,17 +39,17 @@
             <ul>
               <li>
                 <div class="search_box">
-                   <input class="search" type="text" placeholder="Search.." />
-                   <button class="search_btn"> <i class="fas fa-search"></i></button>         
+                  <input class="search" type="text" placeholder="Search.." />
+                  <button class="search_btn"> <i class="fas fa-search"></i></button>         
 
                 </div>               
                 </div>
               </li>
-              <li><a href="/public/storefront.html"><i  class="fa-solid fa-house"></i></a>  </i>  </li>
-              <li><a href="/public/cart.html"> <i class="fa-solid fa-cart-shopping"> </i></a> </li>
-              <li> <a href="/public/profile"><i class="fa-solid fa-user"> </i></a></li>
-              <li><a href="/public/login-reg"><i class="fa-solid fa-right-from-bracket"></i></a></li>
-              <li><a href="/public/about"><i class="fa-solid fa-question"></i></a></li>
+              <li><a href="/storefront.html"><i  class="fa-solid fa-house"></i></a>  </i>  </li>
+              <li><a href="/cart.html"> <i class="fa-solid fa-cart-shopping"> </i></a> </li>
+              <li> <a href="/login-reg.html"><i class="fa-solid fa-user"> </i></a></li>
+              <li><a href="/profile.html"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+              <li><a href="/about.html"><i class="fa-solid fa-question"></i></a></li>
             </ul>
           </div>
         </div>
@@ -59,46 +59,22 @@
       <div class="store_content">
         <h1 class="Page_titles">Find your Gear !</h1>
 
-        <div class="store_main">
-          <div class="store_card">
-            <div class="store_img">
-              <img src="/public/images/cameras/cam1.png" alt="camera1"  width="200"
-            height="auto">
-            </div>
-            <div class="store_desc">
-              <h1> Cannon 5D mark 4</h1>
-              <p>Black</p>
-            </div>
-            <div class="price">
-              <h1> Price: $ 1700.00</h1>
-            </div>
-        </div>
+        <div id="inventory" class="store_main">
+
+        <template id="store-card-template">
         <div class="store_card">
-            <div class="store_img">
-              <img src="/public/images/cameras/cam3.png" alt="camera1"  width="200"
-            height="auto">
-            </div>
-            <div class="store_desc">
-              <h1> Sony Alpha A4</h1>
-              <p>Silver</p>
-            </div>
-            <div class="price">
-              <h1> Price: $ 2200.00</h1>
-            </div>
+          <div class="store_img">
+            <img src="" alt="" width="200" height="auto">
+          </div>
+          <div class="store_desc">
+            <h1 class="item-name"></h1>
+            <p class="item-description"></p>
+          </div>
+          <div class="price">
+            <h1 class="item-price"></h1>
+          </div>
         </div>
-        <div class="store_card">
-            <div class="store_img">
-              <img src="/public/images/cameras/cam2.png" alt="camera1"  width="200"
-            height="auto">
-            </div>
-            <div class="store_desc">
-              <h1> Cannon 4D mark 1</h1>
-              <p>Black</p>
-            </div>
-            <div class="price">
-              <h1> Price: $ 1000.00</h1>
-            </div>
-        </div>
+        </template>
       </div>
 
         
@@ -124,6 +100,6 @@
       </div>
     </div>
     </div>
-    <script src="index.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

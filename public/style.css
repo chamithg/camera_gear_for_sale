@@ -162,7 +162,7 @@ li > a > i:hover {
 
 /* Footer*/
 .footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   margin-bottom: 0;
   margin-left: 0;

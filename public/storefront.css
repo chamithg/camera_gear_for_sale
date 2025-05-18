@@ -5,8 +5,12 @@
 .store_main {
   margin-top: 5px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   gap: 15px;
+}
+.store_img > img {
+  max-height: 200px;
 }
 
 .store_card {

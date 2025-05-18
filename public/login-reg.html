@@ -39,11 +39,11 @@
           <div class="nav-bar">
             <ul>
               <li></div></li>
-              <li><a href="/public/storefront.html"><i  class="fa-solid fa-house"></i></a>  </i>  </li>
-              <li><a href="/public/cart.html"> <i class="fa-solid fa-cart-shopping"> </i></a> </li>
-              <li> <a href="/public/profile"><i class="fa-solid fa-user"> </i></a></li>
-              <li><a href="/public/login-reg"><i class="fa-solid fa-right-from-bracket"></i></a></li>
-              <li><a href="/public/about"><i class="fa-solid fa-question"></i></a></li>
+              <li><a href="/storefront.html"><i  class="fa-solid fa-house"></i></a>  </i>  </li>
+              <li><a href="/cart.html"> <i class="fa-solid fa-cart-shopping"> </i></a> </li>
+              <li> <a href="/login-reg.html"><i class="fa-solid fa-user"> </i></a></li>
+              <li><a href="/profile.html"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+              <li><a href="/about.html"><i class="fa-solid fa-question"></i></a></li>
             </ul>
           </div>
         </div>
@@ -78,39 +78,23 @@
         <h2 >No account with us? </h2>
         <h2> then create one today! <i class="fa-solid fa-arrow-right"></i></h2>
           </div>
-          <div class="register">
-            <h1 class="Page_titles"> Register</h1>
-            <form action="">
-            <label for="Firstname">
-                First Name:
-            </label><br> 
-            <input type="text" id="firstname" name="first" 
-                placeholder="Enter your First Name" required>
-            <br> 
-            <label for="Lastname">
-                Last Name:
-            </label><br> 
-            <input type="text" id="lastname" name="last" 
-                placeholder="Enter your Last Name" required>
-            <br> 
-            <label for="email">
-                Email:
-            </label><br> 
-            <input type="email" id="email" name="email" 
-                placeholder="Enter your Last Name" required>
-            <br> 
-            <label for="password">
-                Password:
-            </label><br> 
-            <input type="password" id="password" name="password" 
-                placeholder="Enter your Password" required>
+         <form action="/register" method="post">
+  <label for="username">Username:</label><br> 
+  <input type="text" id="username" name="username" placeholder="Enter your Username" required>
+  <br> 
 
-            <div class="submit">
-                <button type="submit">
-                    Submit
-                </button>
-            </div>
-        </form>
+  <label for="email">Email:</label><br> 
+  <input type="email" id="email" name="email" placeholder="Enter your email" required>
+  <br> 
+
+  <label for="password">Password:</label><br> 
+  <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+  <br>
+
+  <div class="submit">
+    <button type="submit">Submit</button>
+  </div>
+</form>
           </div>
 
         

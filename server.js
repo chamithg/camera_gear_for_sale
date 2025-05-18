@@ -3,8 +3,15 @@ const path = require("path");
 const app = express();
 const port = 3000;
 
+const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
+
 // setup database
 const sqlite3 = require("sqlite3").verbose();
+
+const SALT_ROUNDS = 10;
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = new sqlite3.Database("SHOP.db", (err) => {
   if (err) {
@@ -31,6 +38,44 @@ db.run(
     console.log("inventory table created (if it didn't already exist).");
   }
 );
+
+//populate table
+
+// db.serialize(() => {
+//   const stmt = db.prepare(`
+//     INSERT INTO INVENTORY (name, description, price, image_url)
+//     VALUES (?, ?, ?, ?)
+//   `);
+
+//   const items = [
+//     ["Cannon 6D mark 1", "black", 990.0, "images/camera/cam4"],
+//     ["Cannon 5D mark 3", "black", 1200.0, "images/camera/cam5"],
+//     ["Cannon 100-300mm f4", "black", 2000.0, "images/camera/lens1"],
+//     ["Cannon 24-70mm f3.5 - 5", "black", 850.0, "images/camera/lens2"],
+//     ["Cannon 50mm f1.8", "black", 500.0, "images/camera/lens3"],
+//     ["Cannon 70-200mm f2", "black", 1800.0, "images/camera/lens4"],
+
+//     ["Cannon 60-600mm f4.5-6.3", "black", 3200.0, "images/camera/lens5"],
+//     ,
+//     ["Neewer strobe light v2", "black", 1200.0, "images/camera/light1"],
+//     ["Neewer Video Tripod v2", "black", 450.0, "images/camera/tripod1"],
+//     ["Neewer mobile Tripod v2", "orange", 400.0, "images/camera/tripod2"],
+//     ["Peak design camera bag ", "gray", 250.0, "images/camera/bag1"],
+//     ["Cannon 4D mark 1", "black", 1700.0, "images/camera/cam3"],
+//     ["Sony Alpha A4", "silver", 2200.0, "images/camera/cam2"],
+//     ["Cannon 5D mark4", "Black", 2500.0, "images/camera/cam1"],
+//   ];
+
+//   for (const item of items) {
+//     stmt.run(item, (err) => {
+//       if (err) console.error("Insert error:", err.message);
+//     });
+//   }
+
+//   stmt.finalize(() => {
+//     console.log("All items inserted into inventory.");
+//   });
+// });
 
 // create user table
 db.run(
@@ -71,6 +116,8 @@ db.run(
   }
 );
 
+// populate items table
+
 // server.js
 // A simple Express.js backend for a Todo list API
 
@@ -82,5 +129,46 @@ app.use(express.static("public"));
 
 // server index.html
 app.get("/", (req, res) => {
-  res.sendFile("public/storefront.html");
+  res.sendFile(path.join(__dirname, "public", "storefront.html"));
+});
+
+// retrive inventory
+
+app.get("/api/inventory", (req, res) => {
+  db.all("SELECT * FROM INVENTORY", (err, rows) => {
+    if (err) {
+      return console.error("Error fetching data:", err.message);
+    }
+    res.json(rows);
+  });
+});
+
+// register
+app.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    const hash = await bcrypt.hash(password, SALT_ROUNDS);
+    const stmt = `INSERT INTO users (username,email, password) VALUES (?, ?, ?)`;
+
+    db.run(stmt, [username, email, hash], (err) => {
+      if (err) {
+        console.error(err.message);
+        return res
+          .status(400)
+          .send("Username already exists or an error occurred.");
+      }
+      alert("user created");
+      res.redirect("/");
+    });
+  } catch (error) {
+    console.error("Hashing failed:", error);
+    res.status(500).send("Internal server error.");
+  }
+});
+
+//login
+
+app.listen(port, () => {
+  console.log(`Todo API server running at http://localhost:${port}`);
 });
