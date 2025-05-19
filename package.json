@@ -13,6 +13,7 @@
     "alert": "^6.0.2",
     "bcrypt": "^6.0.0",
     "express": "^5.1.0",
+    "express-session": "^1.18.1",
     "js-alert": "^2.0.0",
     "morgan": "^1.10.0",
     "node-notifier": "^10.0.1",

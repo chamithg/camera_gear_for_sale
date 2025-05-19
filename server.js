@@ -2,10 +2,10 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const port = 3000;
-const notifier = require("node-notifier");
 
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
+const session = require("express-session");
 
 // setup database
 const sqlite3 = require("sqlite3").verbose();
@@ -13,6 +13,13 @@ const sqlite3 = require("sqlite3").verbose();
 const SALT_ROUNDS = 10;
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "focus123",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 const db = new sqlite3.Database("SHOP.db", (err) => {
   if (err) {
@@ -170,6 +177,34 @@ app.post("/register", async (req, res) => {
 });
 
 //login
+
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.redirect("/login-reg.html?error=missing_fields");
+  }
+
+  const stmt = `SELECT * FROM USERS WHERE username = ?`;
+  db.get(stmt, [username], async (err, user) => {
+    if (err) {
+      console.error("DB error:", err.message);
+      return res.redirect("/login-reg.html?error=server_error");
+    }
+
+    if (!user) {
+      return res.redirect("/login-reg.html?error=invalid_credentials");
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (match) {
+      req.session.user = { id: user.id, username: user.username };
+      return res.redirect("/storefront.html?status=loggedin");
+    } else {
+      return res.redirect("/login.html?error=invalid_credentials");
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`Todo API server running at http://localhost:${port}`);

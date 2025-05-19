@@ -56,18 +56,16 @@
         <div class="content_main">
           <div class="login">
             <h1 class="Page_titles">Login</h1>
-            <form action="">
+            <form action="/login" method="post">
             <label for="username">
                 Username:
             </label><br> 
-            <input type="text" id="username" name="first" 
-                placeholder="Enter your Username" required>
+            <input type="text" name="username" placeholder="Enter Username" required>
             <br> 
             <label for="password">
                 Password:
             </label><br> 
-            <input type="password" id="password" name="password" 
-                placeholder="Enter your Password" required>
+              <input type="password" name="password" placeholder="Enter Password" required>
 
             <div class="submit">
                 <button type="submit">
@@ -78,28 +76,28 @@
         <h2 >No account with us? </h2>
         <h2> then create one today! <i class="fa-solid fa-arrow-right"></i></h2>
           </div>
-         <form action="/register" method="post">
-  <label for="username">Username:</label><br> 
-  <input type="text" id="username" name="username" placeholder="Enter your Username" required>
-  <br> 
+        <form action="/register" method="post">
+            <label for="username">Username:</label><br> 
+            <input type="text" id="username" name="username" placeholder="Enter your Username" required>
+            <br> 
 
-  <label for="email">Email:</label><br> 
-  <input type="email" id="email" name="email" placeholder="Enter your email" required>
-  <br> 
+            <label for="email">Email:</label><br> 
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <br> 
 
-  <label for="password">Password:</label><br> 
-  <input type="password" id="password" name="password" placeholder="Enter your Password" required>
-  <br>
+            <label for="password">Password:</label><br> 
+            <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+            <br>
 
-  <label for="password_confirm">Confirm Password:</label><br> 
-  <input type="password_confirm" id="password_confirm" name="password_confirm" placeholder="confirm your Password" required>
-  <br>
+            <label for="password_confirm">Confirm Password:</label><br> 
+            <input type="password" id="password_confirm" name="password_confirm" placeholder="confirm your Password" required>
+            <br>
 
 
-  <div class="submit">
-    <button type="submit">Submit</button>
-  </div>
-</form>
+            <div class="submit">
+              <button type="submit">Submit</button>
+            </div>
+          </form>
           </div>
 
         
@@ -133,8 +131,11 @@
     </div>
     <script src="script.js"></script>
    <script src="https://cdn.jsdelivr.net/gh/noumanqamar450/alertbox@main/version/1.0.2/alertbox.min.js"></script>
+   <script>
+      showAlertFromParams();
+    </script>
 
-    <script>
+    <!-- <script>
       const params = new URLSearchParams(window.location.search);
       const error = params.get("error");
       const status = params.get("status")
@@ -163,6 +164,23 @@
           btnTitle: 'Ok',
           border:true
         });
+      } else if  (error === "invalid_credentials") {
+        alertbox.render({
+          alertIcon: 'error',
+          title: 'Login Failed',
+          message: 'Invalid username or password.',
+          btnTitle: 'Try Again',
+          border: true
+        });
+
+      }else if (error === "missing_fields") {
+        alertbox.render({
+          alertIcon: 'error',
+          title: 'Login Failed',
+          message: 'Missing fields.',
+          btnTitle: 'Try Again',
+          border: true
+        });
       }
         if (status === "created") {
           alertbox.render({
@@ -172,8 +190,17 @@
             btnTitle: 'Ok',
             border: true
           });
+        }else if (status==="loggedin"){
+            alertbox.render({
+            alertIcon: 'success',
+            title: 'Success!',
+            message: 'Logged in!',
+            btnTitle: 'Ok',
+            border: true
+          });
         }
-    </script>
+      
+    </script> -->
   </body>
 </html>
 
