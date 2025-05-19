@@ -91,6 +91,11 @@
   <input type="password" id="password" name="password" placeholder="Enter your Password" required>
   <br>
 
+  <label for="password_confirm">Confirm Password:</label><br> 
+  <input type="password_confirm" id="password_confirm" name="password_confirm" placeholder="confirm your Password" required>
+  <br>
+
+
   <div class="submit">
     <button type="submit">Submit</button>
   </div>
@@ -126,7 +131,49 @@
       </div>
     </div>
     </div>
-    <script src="index.js"></script>
+    <script src="script.js"></script>
+   <script src="https://cdn.jsdelivr.net/gh/noumanqamar450/alertbox@main/version/1.0.2/alertbox.min.js"></script>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const error = params.get("error");
+      const status = params.get("status")
+
+      if (error === "password_mismatch") {
+        alertbox.render({
+          alertIcon: 'warning',
+          title: 'Attention!',
+          message: 'Password does not match',
+          btnTitle: 'Ok',
+          border:true
+        });
+      } else if (error === "username_exists") {
+         alertbox.render({
+          alertIcon: 'warning',
+          title: 'Attention!',
+          message: 'User Exists',
+          btnTitle: 'Ok',
+          border:true
+        });
+      } else if (error === "server_error") {
+         alertbox.render({
+          alertIcon: 'warning',
+          title: 'Attention!',
+          message: 'Internal server error occured, Please try again',
+          btnTitle: 'Ok',
+          border:true
+        });
+      }
+        if (status === "created") {
+          alertbox.render({
+            alertIcon: 'success',
+            title: 'Success!',
+            message: 'User Created. Please Login!',
+            btnTitle: 'Ok',
+            border: true
+          });
+        }
+    </script>
   </body>
 </html>
 

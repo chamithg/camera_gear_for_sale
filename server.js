@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const port = 3000;
+const notifier = require("node-notifier");
 
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
@@ -145,25 +146,26 @@ app.get("/api/inventory", (req, res) => {
 
 // register
 app.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, password_confirm } = req.body;
+
+  if (password !== password_confirm) {
+    return res.redirect("/login-reg.html?error=password_mismatch");
+  }
 
   try {
     const hash = await bcrypt.hash(password, SALT_ROUNDS);
-    const stmt = `INSERT INTO users (username,email, password) VALUES (?, ?, ?)`;
+    const stmt = `INSERT INTO users (username, email, password) VALUES (?, ?, ?)`;
 
     db.run(stmt, [username, email, hash], (err) => {
       if (err) {
         console.error(err.message);
-        return res
-          .status(400)
-          .send("Username already exists or an error occurred.");
+        return res.redirect("/login-reg.html?error=username_exists");
       }
-      alert("user created");
-      res.redirect("/");
+      res.redirect("/login-reg.html?status=created");
     });
   } catch (error) {
     console.error("Hashing failed:", error);
-    res.status(500).send("Internal server error.");
+    res.redirect("/login-reg.html?error=server_error");
   }
 });
 
