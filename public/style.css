@@ -89,7 +89,7 @@ body {
       transparent 12px,
       transparent 32px
     ),
-    linear-gradient(90deg, rgb(109, 168, 191), rgb(85, 132, 132));
+    linear-gradient(90deg, #fffdf6, #578fca);
 }
 
 li {

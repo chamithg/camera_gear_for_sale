@@ -42,7 +42,7 @@
               <li><a href="/storefront.html"><i  class="fa-solid fa-house"></i></a>  </i>  </li>
               <li><a href="/cart.html"> <i class="fa-solid fa-cart-shopping"> </i></a> </li>
               <li> <a href="/login-reg.html"><i class="fa-solid fa-user"> </i></a></li>
-              <li><a href="/profile.html"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+              <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
               <li><a href="/about.html"><i class="fa-solid fa-question"></i></a></li>
             </ul>
           </div>
@@ -135,72 +135,7 @@
       showAlertFromParams();
     </script>
 
-    <!-- <script>
-      const params = new URLSearchParams(window.location.search);
-      const error = params.get("error");
-      const status = params.get("status")
-
-      if (error === "password_mismatch") {
-        alertbox.render({
-          alertIcon: 'warning',
-          title: 'Attention!',
-          message: 'Password does not match',
-          btnTitle: 'Ok',
-          border:true
-        });
-      } else if (error === "username_exists") {
-         alertbox.render({
-          alertIcon: 'warning',
-          title: 'Attention!',
-          message: 'User Exists',
-          btnTitle: 'Ok',
-          border:true
-        });
-      } else if (error === "server_error") {
-         alertbox.render({
-          alertIcon: 'warning',
-          title: 'Attention!',
-          message: 'Internal server error occured, Please try again',
-          btnTitle: 'Ok',
-          border:true
-        });
-      } else if  (error === "invalid_credentials") {
-        alertbox.render({
-          alertIcon: 'error',
-          title: 'Login Failed',
-          message: 'Invalid username or password.',
-          btnTitle: 'Try Again',
-          border: true
-        });
-
-      }else if (error === "missing_fields") {
-        alertbox.render({
-          alertIcon: 'error',
-          title: 'Login Failed',
-          message: 'Missing fields.',
-          btnTitle: 'Try Again',
-          border: true
-        });
-      }
-        if (status === "created") {
-          alertbox.render({
-            alertIcon: 'success',
-            title: 'Success!',
-            message: 'User Created. Please Login!',
-            btnTitle: 'Ok',
-            border: true
-          });
-        }else if (status==="loggedin"){
-            alertbox.render({
-            alertIcon: 'success',
-            title: 'Success!',
-            message: 'Logged in!',
-            btnTitle: 'Ok',
-            border: true
-          });
-        }
-      
-    </script> -->
+    
   </body>
 </html>
 

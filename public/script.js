@@ -94,5 +94,13 @@ function showAlertFromParams() {
       btnTitle: "Ok",
       border: true,
     });
+  } else if (status === "logged_out") {
+    alertbox.render({
+      alertIcon: "info",
+      title: "Logged Out",
+      message: "You have been logged out successfully.",
+      btnTitle: "OK",
+      border: true,
+    });
   }
 }

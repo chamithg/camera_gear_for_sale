@@ -205,6 +205,18 @@ app.post("/login", (req, res) => {
     }
   });
 });
+// logout
+
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Logout error:", err);
+      return res.redirect("/storefront.html?error=logout_failed");
+    }
+    res.clearCookie("connect.sid");
+    res.redirect("/storefront.html?status=logged_out");
+  });
+});
 
 app.listen(port, () => {
   console.log(`Todo API server running at http://localhost:${port}`);
