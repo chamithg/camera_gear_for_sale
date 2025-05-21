@@ -196,6 +196,7 @@ li > a > i:hover {
   padding: 5px;
   border-radius: 15px;
 }
+
 .social i:hover {
   color: aliceblue;
 }
@@ -217,4 +218,8 @@ li > a > i:hover {
   .nav_container {
     display: flex;
   }
+}
+/* hide an element */
+.hidden {
+  display: none;
 }

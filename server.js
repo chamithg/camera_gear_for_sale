@@ -124,6 +124,25 @@ db.run(
   }
 );
 
+// create wishlist table
+db.run(
+  `
+  CREATE TABLE IF NOT EXISTS WISH_LIST (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    item_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (item_id) REFERENCES items(id)
+  )
+`,
+  (err) => {
+    if (err) {
+      return console.error("Error creating whishlist table:", err.message);
+    }
+    console.log("wishlist table created (if it didn't already exist).");
+  }
+);
+
 // populate items table
 
 // server.js
@@ -217,6 +236,100 @@ app.get("/logout", (req, res) => {
     res.redirect("/storefront.html?status=logged_out");
   });
 });
+
+// session check in
+app.get("/api/session-status", (req, res) => {
+  if (req.session.user) {
+    res.json({ loggedIn: true, username: req.session.user.username });
+  } else {
+    res.json({ loggedIn: false });
+  }
+});
+// add to cart
+
+app.post("/cart/add", (req, res) => {
+  const { itemId } = req.body;
+  const user = req.session.user;
+  const userId = user.id;
+
+  // Check if item already exists in cart
+  const checkSql = `SELECT * FROM CART_ITEMS WHERE user_id = ? AND item_id = ?`;
+  db.get(checkSql, [userId, itemId], (err, row) => {
+    if (err) {
+      console.error("Error checking cart:", err);
+      return res.status(500).json({ error: "Database error" });
+    }
+
+    if (row) {
+      // Update quantity if item is already in cart
+      const updateSql = `
+        UPDATE CART_ITEMS
+        SET quantity = quantity + 1
+        WHERE user_id = ? AND item_id = ?
+      `;
+      db.run(updateSql, [userId, itemId], function (err) {
+        if (err) {
+          console.error("Error updating cart:", err);
+          return res.status(500).json({ error: "Update failed" });
+        }
+        return res.json({ success: true, updated: true });
+      });
+    } else {
+      // Insert new cart item
+      const insertSql = `
+        INSERT INTO CART_ITEMS (user_id, item_id, quantity)
+        VALUES (?, ?, 1)
+      `;
+      db.run(insertSql, [userId, itemId], function (err) {
+        if (err) {
+          console.error("Error inserting into cart:", err);
+          return res.status(500).json({ error: "Insert failed" });
+        }
+        return res.json({ success: true, inserted: true });
+      });
+    }
+  });
+});
+
+// add to wishlist
+
+app.post("/wishlist/add", (req, res) => {
+  const { itemId } = req.body;
+  const user = req.session.user;
+
+  const userId = user.id;
+
+  // First: check if item is in WISH_LIST
+  const checkWishlistSql = `SELECT * FROM WISH_LIST WHERE user_id = ? AND item_id = ?`;
+  db.get(checkWishlistSql, [userId, itemId], (err, wishlistRow) => {
+    if (err) {
+      console.error("Error checking wishlist:", err);
+      return res.status(500).json({ error: "Database error" });
+    }
+
+    if (wishlistRow) {
+      return res.json({
+        success: false,
+        inWishlist: true,
+        message: "Item already in your wishlist.",
+      });
+    } else {
+      // Insert new item into cart
+      const insertSql = `
+          INSERT INTO WISH_LIST (user_id, item_id)
+          VALUES (?, ?)
+        `;
+      db.run(insertSql, [userId, itemId], function (err) {
+        if (err) {
+          console.error("Error inserting into wishlist:", err);
+          return res.status(500).json({ error: "Insert failed" });
+        }
+        return res.json({ success: true, inserted: true });
+      });
+    }
+  });
+});
+// run the program
 
 app.listen(port, () => {
   console.log(`Todo API server running at http://localhost:${port}`);

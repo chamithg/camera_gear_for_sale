@@ -47,8 +47,9 @@
               </li>
               <li><a href="/storefront.html"><i  class="fa-solid fa-house"></i></a>  </i>  </li>
               <li><a href="/cart.html"> <i class="fa-solid fa-cart-shopping"> </i></a> </li>
-              <li> <a href="/login-reg.html"><i class="fa-solid fa-user"> </i></a></li>
-              <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+              <li> <a href="/profile.html" class="" id="profile-btn"><i class="fa-solid fa-user"> </i></a></li>
+              <li> <a href="/login-reg.html" class="" id="login-btn"><i class="fa-solid fa-right-to-bracket"></i> </i></a></li>
+              <li><a href="/logout" class="" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i></a></li>
               <li><a href="/about.html"><i class="fa-solid fa-question"></i></a></li>
             </ul>
           </div>
@@ -57,7 +58,7 @@
 
       <!-- content -->
       <div class="store_content">
-        <h1 class="Page_titles">Find your Gear !</h1>
+        <h1 class="Page_titles">Hello <span id="user_name_context" class="Page_titles"></span>, Find your Gear !</h1>
 
         <div id="inventory" class="store_main">
 
@@ -73,7 +74,14 @@
           <div class="price">
             <h1 class="item-price"></h1>
           </div>
+          <div class="card_btns">
+             <button class="add_to_wish_btn" id="add_to_wishlist"> wishlist   <i class="fa-solid fa-heart"></i></button>
+          <button class="add_to_cart_btn" id="add_to_cart"> Add to  <i class="fa-solid fa-cart-plus"></i></button>
+
+          </div>
+         
         </div>
+        
         </template>
       </div>
 

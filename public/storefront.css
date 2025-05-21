@@ -15,7 +15,7 @@
 
 .store_card {
   width: 250px;
-  height: 300px;
+  height: 360px;
   justify-content: center;
   align-items: center;
   padding: 20px;
@@ -28,7 +28,41 @@
   -webkit-backdrop-filter: blur(5.8px);
   transition: background 0.8s ease;
 }
+.card_btns {
+  display: flex;
+  justify-content: space-around;
+}
 
+.add_to_cart_btn {
+  border: 5px bisque;
+  font-size: 18px;
+  margin-top: 30px;
+  padding: 10px;
+  color: rgb(2, 40, 59);
+  background: #6889d5;
+  border-radius: 15px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: background 0.8s ease;
+}
+
+.add_to_wish_btn {
+  border: 5px bisque;
+  font-size: 18px;
+  margin-top: 30px;
+  padding: 10px;
+  color: rgb(2, 40, 59);
+  background: #76c992;
+  border-radius: 15px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: background 0.8s ease;
+}
+.add_to_cart_btn:hover {
+  background-color: rgb(178, 194, 55);
+}
+
+.add_to_wish_btn:hover {
+  background-color: rgb(228, 58, 58);
+}
 .store_card:hover {
   background: #9fb3df;
 }
