@@ -66,3 +66,7 @@
 .store_card:hover {
   background: #9fb3df;
 }
+
+.footer {
+  position: relative;
+}

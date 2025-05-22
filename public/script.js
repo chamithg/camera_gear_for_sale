@@ -263,6 +263,68 @@ async function addToWishlist(itemId) {
       });
   }
 }
+// retrive wishlist
+fetch("/api/wishlist")
+  .then((res) => res.json())
+  .then((items) => {
+    const container = document.getElementById("wishlist-container");
+    const template = document.getElementById("wishlist-card-template");
+
+    if (items.length === 0) {
+      container.innerHTML = "<p>Your wishlist is empty.</p>";
+      return;
+    }
+
+    items.forEach((item) => {
+      const card = template.content.cloneNode(true);
+
+      card.querySelector("img").src = `/${item.image_url}.png`;
+      card.querySelector("img").alt = item.name;
+      card.querySelector(".item-name").textContent = item.name;
+      card.querySelector(".item-description").textContent =
+        item.description || "No description";
+      card.querySelector(
+        ".item-price"
+      ).textContent = `Price: $${item.price.toFixed(2)}`;
+
+      // Button: Remove from wishlist
+      card.querySelector(".remove_wish").addEventListener("click", () => {
+        fetch("/wishlist/remove", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ itemId: item.id }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              location.reload(); // Refresh list
+            }
+          });
+      });
+
+      // Button: Add to cart
+      card.querySelector(".add_to_cart").addEventListener("click", () => {
+        fetch("/cart/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ itemId: item.id }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              alert("Item added to cart!");
+            }
+          });
+      });
+
+      container.appendChild(card);
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to load wishlist:", err);
+    document.getElementById("wishlist-container").innerHTML =
+      "<p>Error loading wishlist.</p>";
+  });
 
 // alerts
 

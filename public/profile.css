@@ -5,8 +5,6 @@
   justify-content: space-around;
 }
 
-.prof_info {
-}
 .Purchase_hist {
   background: rgba(255, 255, 255, 0.07);
   border-radius: 16px;
@@ -14,4 +12,38 @@
   backdrop-filter: blur(5.8px);
   -webkit-backdrop-filter: blur(5.8px);
   padding: 20px;
+}
+.wishlist_card {
+  display: flex;
+  width: 50vw;
+}
+.wishlist_img {
+  width: 10vw;
+}
+.wishlist_desc {
+  width: 20vw;
+}
+.price {
+  width: 10vw;
+}
+.wish_btns {
+  width: 10vw;
+  display: flex;
+}
+.wish_btns > button {
+  height: 40px;
+  width: 40px;
+  padding: 5px;
+  margin-left: 10px;
+  background-color: rgb(162, 224, 121);
+  border: 0;
+  border-radius: 10px;
+  transition: background 0.8s ease;
+}
+.remove_wish {
+  background-color: rgb(216, 78, 78);
+}
+
+.wish_btns > button:hover {
+  background-color: rgb(217, 121, 224);
 }

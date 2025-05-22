@@ -266,7 +266,10 @@ app.get("/logout", (req, res) => {
 // session check in
 app.get("/api/session-status", (req, res) => {
   if (req.session.user) {
-    res.json({ loggedIn: true, username: req.session.user.username });
+    res.json({
+      loggedIn: true,
+      username: req.session.user.username,
+    });
   } else {
     res.json({ loggedIn: false });
   }
@@ -421,6 +424,47 @@ app.post("/wishlist/add", (req, res) => {
     }
   });
 });
+// remove from wishlist
+app.post("/wishlist/remove", (req, res) => {
+  const userId = req.session.user?.id;
+  const { itemId } = req.body;
+
+  if (!userId) return res.status(401).json({ error: "Unauthorized" });
+
+  db.run(
+    `DELETE FROM WISH_LIST WHERE user_id = ? AND item_id = ?`,
+    [userId, itemId],
+    function (err) {
+      if (err) return res.status(500).json({ error: "DB error" });
+      res.json({ success: true });
+    }
+  );
+});
+
+// retrive wishlist
+app.get("/api/wishlist", (req, res) => {
+  const userId = req.session.user?.id;
+
+  if (!userId) {
+    return res.status(401).json({ error: "User not logged in" });
+  }
+
+  const sql = `
+    SELECT i.id, i.name, i.description, i.price, i.image_url
+    FROM WISH_LIST w
+    JOIN INVENTORY i ON w.item_id = i.id
+    WHERE w.user_id = ?
+  `;
+
+  db.all(sql, [userId], (err, rows) => {
+    if (err) {
+      console.error("Failed to fetch wishlist:", err.message);
+      return res.status(500).json({ error: "Database error" });
+    }
+    res.json(rows);
+  });
+});
+
 // run the program
 
 app.listen(port, () => {

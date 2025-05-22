@@ -16,8 +16,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="storefront.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="profile.css" />
+    
   </head>
   <body>
     <div class="main_content">
@@ -42,8 +44,9 @@
               </li>
               <li><a href="/storefront.html"><i  class="fa-solid fa-house"></i></a>  </i>  </li>
               <li><a href="/cart.html"> <i class="fa-solid fa-cart-shopping"> </i></a> </li>
-              <li> <a href="/login-reg.html"><i class="fa-solid fa-user"> </i></a></li>
-              <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+              <li> <a href="/profile.html" class="" id="profile-btn"><i class="fa-solid fa-user"> </i></a></li>
+              <li> <a href="/login-reg.html" class="" id="login-btn"><i class="fa-solid fa-right-to-bracket"></i> </i></a></li>
+              <li><a href="/logout" class="" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i></a></li>
               <li><a href="/about.html"><i class="fa-solid fa-question"></i></a></li>
             </ul>
           </div>
@@ -55,20 +58,44 @@
 
         <div class="prof_info">
           <h1 class="Page_titles">Profile</h1>
-        <img src="/public/images/profile.png" alt="profile image" width="300"
+        <img src="/images/profile.png" alt="profile image" width="300"
             height="auto">
-        <h2 class="gen_txt">John Doe</h2>
-        <h2 class="gen_txt">johndoegen@yahoo.com</h2>
+        <span><h2 class="gen_txt">Name: </h2><h2 class="gen_txt" id="user_name_context"></h2></span>
+        <h2 class="gen_txt" id="user_email"></h2>
 
         </div>
 
         <div class="Purchase_hist">
-          <h1 class="Page_titles">Purchase History</h1>
-          <ul>
-            <li><h2 class="gen_txt">Sony Alpha A4R  $2450/ 05-01-2025</h2></li>
-            <li><h2 class="gen_txt">Sony 50mm Prime Lens$ 2450/ 05-02-2025</h2></li>
+          <h1 class="Page_titles">Wish list</h1>
+          <div class="">
+        <div class="wishlist_main" id="wishlist-container">
+  <template id="wishlist-card-template">
+    <div class="wishlist_card">
+      <div class="wishlist_img">
+        <img src="" alt="wishlist item" width="100" height="auto" />
+      </div>
+      <div class="wishlist_desc">
+        <h1 class="item-name"></h1>
+        <p class="item-description"></p>
+      </div>
+      <div class="price">
+        <h1 class="item-price"></h1>
+      </div>
+      <div class="wish_btns">
+        <button class="remove_wish"><i class="fa-solid fa-heart-circle-minus"></i></button>
+        <button class="add_to_cart"><i class="fa-solid fa-cart-plus"></i></button>
+        
+        
 
-          </ul>
+      </div>
+
+      
+
+    </div>
+  </template>
+</div>
+
+          </div>
           
           
           
@@ -99,7 +126,7 @@
     </div>
     </div>
     <script src="script.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/noumanqamar450/alertbox@main/version/1.0.2/alertbox.min.js"></script>;
+        <script src="https://cdn.jsdelivr.net/gh/noumanqamar450/alertbox@main/version/1.0.2/alertbox.min.js"></script>
     <script>
       showAlertFromParams();
     </script>

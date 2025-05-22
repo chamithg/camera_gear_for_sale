@@ -158,11 +158,12 @@ li > a > i:hover {
   width: 80vw;
   margin: auto;
   margin-top: 2vh;
+  height: 100%;
 }
 
 /* Footer*/
 .footer {
-  position: relative;
+  position: fixed;
   bottom: 0;
   margin-bottom: 0;
   margin-left: 0;
