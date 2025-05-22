@@ -170,6 +170,32 @@ app.get("/api/inventory", (req, res) => {
   });
 });
 
+// retrive cart items
+app.get("/api/cart", (req, res) => {
+  const user = req.session.user;
+  if (!user) {
+    return res.status(401).json({ error: "User not logged in" });
+  }
+
+  const userId = user.id;
+
+  const sql = `
+    SELECT ci.id, ci.quantity, i.name, i.price, i.image_url
+    FROM CART_ITEMS ci
+    JOIN INVENTORY i ON ci.item_id = i.id
+    WHERE ci.user_id = ?
+  `;
+
+  db.all(sql, [userId], (err, rows) => {
+    if (err) {
+      console.error("Error fetching cart items:", err.message);
+      return res.status(500).json({ error: "Database error" });
+    }
+
+    res.json(rows);
+  });
+});
+
 // register
 app.post("/register", async (req, res) => {
   const { username, email, password, password_confirm } = req.body;

@@ -54,44 +54,32 @@
       <div class="cart_content">
 
         <h1 class="Page_titles">Shopping Cart</h1>
-        <div class="cart_main">
-          <div class="cart_card">
-            <div class="cart_img">
-              <img src="/public/images/cameras/cam1.png" alt="camera1"  width="100"
-            height="auto">
+        <div class="cart_main"  id="cart-container">
+          <template id="cart-card-template">
+            <div class="cart_card">
+              <div class="cart_img">
+                <img src="" alt="cart image" width="100" height="auto">
+              </div>
+              <div class="cart_desc">
+                <h1 class="item-name"></h1>
+                <p class="item-description"></p>
+              </div>
+              <div class="quantity">
+                <i class="fa-solid fa-plus"></i>
+                <span class="item-quantity">1</span>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+              <div class="price">
+                <h1 class="item-price"></h1>
+                <p class="item-tax"></p>
+              </div>
             </div>
-            <div class="cart_desc">
-              <h1> Cannon 5D mark 4</h1>
-              <p>Black</p>
-            </div>
-            <div> <i class="fa-solid fa-plus"></i> 1 <i class="fa-solid fa-minus"></i></div>
-            <div class="price">
-              <h1> Price: $ 1700.00</h1>
-              <p> tax $ 170.00</p>
-            </div>
-            
+          </template>
         
-          </div>
-          <div class="cart_card">
-            <div class="cart_img">
-              <img src="/public/images/cameras/cam2.png" alt="camera2"  width="100"
-            height="auto">
-            </div>
-            <div class="cart_desc">
-              <h1> Cannon 4D mark 1</h1>
-              <p>Black</p>
-            </div>
-            <div> <i class="fa-solid fa-plus"></i> 1 <i class="fa-solid fa-minus"></i></div>
-            <div class="price">
-              <h1> Price: $ 1000.00</h1>
-              <p> tax:     $ 100.00</p>
-            </div>
-    
-          </div>
 
           <div class="checkout_panel">
             <div >
-              <h1> Total : $ 2970.00</h1>
+              <h1 id="cart-total"> Total : $ 2970.00</h1>
               <button class="checkout_btn"> Checkout</button>
 
             </div>

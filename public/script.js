@@ -45,6 +45,53 @@ fetch("/api/inventory")
       "<p>Error loading inventory.</p>";
   });
 
+// retrive shopping cart
+
+fetch("/api/cart")
+  .then((res) => res.json())
+  .then((cartItems) => {
+    const container = document.getElementById("cart-container");
+    const template = document.getElementById("cart-card-template");
+
+    if (cartItems.length === 0) {
+      container.innerHTML = "<p>Your cart is empty.</p>";
+      return;
+    }
+
+    cartItems.forEach((item) => {
+      const card = template.content.cloneNode(true);
+
+      // Set image source
+      card.querySelector("img").src = `/${item.image_url}.png`;
+      card.querySelector("img").alt = item.name;
+
+      // Set name and description (if you have one; else hardcode)
+      card.querySelector(".item-name").textContent = item.name;
+      card.querySelector(".item-description").textContent = "Black"; // Placeholder
+
+      // Quantity
+      card.querySelector(".item-quantity").textContent = item.quantity;
+
+      // Price and tax
+      const price = parseFloat(item.price);
+      const tax = (price * 0.1).toFixed(2); // Example: 10% tax
+
+      card.querySelector(".item-price").textContent = `Price: $${(
+        price * item.quantity
+      ).toFixed(2)}`;
+      card.querySelector(".item-tax").textContent = `Tax: $${(
+        tax * item.quantity
+      ).toFixed(2)}`;
+
+      container.appendChild(card);
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to load cart items:", err);
+    document.getElementById("cart-container").innerHTML =
+      "<p>Error loading cart.</p>";
+  });
+
 // session check-in when loading pages
 
 window.addEventListener("DOMContentLoaded", () => {
