@@ -1,4 +1,4 @@
-console.log("Script loaded");
+window.addEventListener("DOMContentLoaded", loadCart);
 fetch("/api/inventory")
   .then((res) => res.json())
   .then((data) => {
@@ -46,12 +46,20 @@ fetch("/api/inventory")
   });
 
 // retrive shopping cart
+async function loadCart() {
+  const container = document.getElementById("cart-container");
+  const template = document.getElementById("cart-card-template");
+  const total_amount = document.getElementById("cart-total");
 
-fetch("/api/cart")
-  .then((res) => res.json())
-  .then((cartItems) => {
-    const container = document.getElementById("cart-container");
-    const template = document.getElementById("cart-card-template");
+  try {
+    const res = await fetch("/api/cart");
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch cart data");
+    }
+
+    const cartItems = await res.json();
+    let total = 0;
 
     if (cartItems.length === 0) {
       container.innerHTML = "<p>Your cart is empty.</p>";
@@ -65,16 +73,21 @@ fetch("/api/cart")
       card.querySelector("img").src = `/${item.image_url}.png`;
       card.querySelector("img").alt = item.name;
 
-      // Set name and description (if you have one; else hardcode)
+      // Set name and description
       card.querySelector(".item-name").textContent = item.name;
-      card.querySelector(".item-description").textContent = "Black"; // Placeholder
+      card.querySelector(".item-description").textContent = "Black";
 
       // Quantity
       card.querySelector(".item-quantity").textContent = item.quantity;
 
       // Price and tax
       const price = parseFloat(item.price);
-      const tax = (price * 0.1).toFixed(2); // Example: 10% tax
+      const tax = parseFloat((price * 0.1).toFixed(2));
+      const priceWithTaxEach = price + tax;
+      const unitTotal = priceWithTaxEach * item.quantity;
+
+      // Update total
+      total += unitTotal;
 
       card.querySelector(".item-price").textContent = `Price: $${(
         price * item.quantity
@@ -83,14 +96,36 @@ fetch("/api/cart")
         tax * item.quantity
       ).toFixed(2)}`;
 
+      // quantity update
+
+      const plusBtn = card.querySelector(".fa-plus");
+      const minusBtn = card.querySelector(".fa-minus");
+
+      plusBtn.style.cursor = "pointer";
+      minusBtn.style.cursor = "pointer";
+
+      plusBtn.addEventListener("click", () => {
+        updateQuantity(item.id, "increase");
+      });
+
+      minusBtn.addEventListener("click", () => {
+        updateQuantity(item.id, "decrease");
+      });
+
       container.appendChild(card);
     });
-  })
-  .catch((err) => {
-    console.error("Failed to load cart items:", err);
-    document.getElementById("cart-container").innerHTML =
-      "<p>Error loading cart.</p>";
-  });
+
+    total_amount.textContent = `Total: $${total.toFixed(2)}`;
+  } catch (err) {
+    const loggedIn = await isUserLoggedIn();
+    if (!loggedIn) {
+      container.innerHTML = "<p>Please login to add items to cart!</p>";
+    } else {
+      console.error("Failed to load cart items:", err);
+      container.innerHTML = "<p>Error loading cart.</p>";
+    }
+  }
+}
 
 // session check-in when loading pages
 
@@ -162,6 +197,25 @@ async function addToCart(itemId) {
         console.error("Add to cart failed", err);
       });
   }
+}
+// update quantity
+function updateQuantity(itemId, action) {
+  fetch(`/cart/${action}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ itemId }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        location.reload(); // Reload the cart with updated values
+      }
+    })
+    .catch((err) => {
+      console.error("Failed to update quantity:", err);
+    });
 }
 
 // add to wishlist

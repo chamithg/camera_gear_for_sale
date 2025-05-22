@@ -317,6 +317,72 @@ app.post("/cart/add", (req, res) => {
   });
 });
 
+// Increase quantity
+app.post("/cart/increase", (req, res) => {
+  const userId = req.session.user?.id;
+  const { itemId } = req.body;
+
+  console.log(itemId);
+
+  if (!userId) return res.status(401).json({ error: "Unauthorized" });
+
+  db.run(
+    `UPDATE CART_ITEMS SET quantity = quantity + 1 WHERE id = ?`,
+    [itemId],
+    function (err) {
+      if (err) return res.status(500).json({ error: "DB error" });
+      res.json({ success: true });
+    }
+  );
+});
+
+// Decrease quantity
+app.post("/cart/decrease", (req, res) => {
+  const userId = req.session.user?.id;
+  const { itemId } = req.body; // this is actually the cart item ID (CART_ITEMS.id)
+
+  if (!userId) return res.status(401).json({ error: "Unauthorized" });
+
+  // Step 1: Decrease quantity
+  const updateSql = `UPDATE CART_ITEMS SET quantity = quantity - 1 WHERE id = ? AND user_id = ?`;
+
+  db.run(updateSql, [itemId, userId], function (err) {
+    if (err) {
+      console.error("Error decreasing quantity:", err);
+      return res.status(500).json({ error: "DB error" });
+    }
+
+    // Step 2: Check updated quantity
+    const checkSql = `SELECT quantity FROM CART_ITEMS WHERE id = ? AND user_id = ?`;
+
+    db.get(checkSql, [itemId, userId], (err, row) => {
+      if (err) {
+        console.error("Error checking quantity:", err);
+        return res.status(500).json({ error: "DB error" });
+      }
+
+      if (!row) {
+        return res.status(404).json({ error: "Item not found" });
+      }
+
+      if (row.quantity <= 0) {
+        // Step 3: Delete item
+        const deleteSql = `DELETE FROM CART_ITEMS WHERE id = ? AND user_id = ?`;
+        db.run(deleteSql, [itemId, userId], function (err) {
+          if (err) {
+            console.error("Error deleting item:", err);
+            return res.status(500).json({ error: "DB error" });
+          }
+
+          return res.json({ success: true, deleted: true });
+        });
+      } else {
+        return res.json({ success: true, updated: true });
+      }
+    });
+  });
+});
+
 // add to wishlist
 
 app.post("/wishlist/add", (req, res) => {
