@@ -1,0 +1,16 @@
+This is an e commerce website delveloped for the purpose of selling camera gears.
+Desigend and developed by : Chamith Gamage
+
+Technologies Used:
+HTML / CSS
+Java Script
+Node JS
+Express JS
+Nodemon
+SQLITE 3 
+
+Operating Instrucitons:
+Clone the repository.
+Navigate in to the home folder from terminal
+Run "nodemon server.js" in terminal
+website can be accessed by " http://localhost:3000 "
